@@ -21,7 +21,7 @@ public class Address extends AbstractEntity {
     private boolean is_active = false;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 
 }
