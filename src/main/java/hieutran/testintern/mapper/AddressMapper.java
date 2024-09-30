@@ -3,6 +3,7 @@ package hieutran.testintern.mapper;
 import hieutran.testintern.dto.AddressDTO;
 import hieutran.testintern.entity.Address;
 import hieutran.testintern.entity.User;
+import hieutran.testintern.exception.NotFoundException;
 import hieutran.testintern.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,17 +22,18 @@ public class AddressMapper implements Function<Address, AddressDTO> {
                 .city(address.getCity())
                 .street(address.getStreet())
                 .country(address.getCountry())
-                .is_active(address.is_active())
+                .active(address.isActive())
+                .userId(address.getUser().getId())
                 .build();
     }
 
     public Address applyToEntity(AddressDTO addressDTO) {
-        User user = userRepository.findById(addressDTO.getUserId()).orElse(null);
+        User user = userRepository.findById(addressDTO.getUserId()).orElseThrow(() -> new NotFoundException("User not found with id: " + addressDTO.getUserId()));
         return Address.builder()
-                .city(addressDTO.getCity())
                 .street(addressDTO.getStreet())
+                .city(addressDTO.getCity())
                 .country(addressDTO.getCountry())
-                .is_active(addressDTO.is_active())
+                .active(addressDTO.isActive())
                 .user(user)
                 .build();
     }

@@ -17,8 +17,8 @@ public class Address extends AbstractEntity {
     private String city;
     @Column(name = "country", nullable = false)
     private String country;
-    @Column(name = "is_active", nullable = false)
-    private boolean is_active = false;
+    @Column(name = "active", nullable = false)
+    private boolean active = true;
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)

@@ -12,6 +12,6 @@ public class AddressDTO {
     private String street;
     private String city;
     private String country;
-    private boolean is_active;
+    private boolean active;
     private Long userId;
 }
